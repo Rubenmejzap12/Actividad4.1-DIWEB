@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>4.1. Añadir contenido interactivo en HTML</title>
+	<style>
+		form {
+			width: 50%;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+
+		fieldset {
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-weight: bold;
+		}
+
+		input[type="text"],
+		select {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			margin-bottom: 20px;
+		}
+
+		input[type="submit"],
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		input[type="submit"]:hover,
+		button:hover {
+			background-color: #3e8e41;
+		}
+
+		input[type="text"]:focus,
+		select:focus {
+			outline: none;
+			border-color: #6DA1DA;
+			box-shadow: 0 0 5px #6DA1DA;
+		}
+
+		.error {
+			color: red;
+			font-size: 0.8em;
+			margin-top: 5px;
+		}
+
+		.hidden {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<form>
+		<fieldset>
+			<legend>Datos personales</legend>
+			<label for="nombre">Nombre:</label>
+			<input type="text" id="nombre" name="nombre" required>
+
+			<label for="apellidos">Apellidos:</label>
+			<input type="text" id="apellidos" name="apellidos" required>
+
+			<label for="email">Correo electrónico:</label>
+			<input type="email" id="email" name="email" required>
+
+			<label for="edad">Edad:</label>
+			<select id="edad" name="edad">
+				<option value="menos de 18">Menos de 18</option>
+				<option value="entre 18 y 30">Entre 18 y 30</option>
+				<option value="entre 31 y 45">Entre 31 y 45</option>
+				<option value="más de 45">Más de 45</option>
+			</select>
+
+			<input type="submit" value="Enviar">
+		</fieldset>
+	</form>
+
+	<details>
+		<summary>Más información</summary>
+		<p>Aquí puedes encontrar más detalles acerca del formulario.</p>
+	</details>
+
+	<button id="open-dialog">Abrir diálogo</button>
+	<dialog id="my-dialog">
+		<p>¿Está seguro que desea cerrar el diálogo?</p>
+		<button id="cancelar">Cancelar</button>
+		<button id="aceptar">Aceptar</button>
+	</dialog>
+
+	<script>
+		var dialog = document.getElementById("my-dialog");
+		var btn = document.getElementById("open-dialog");
+		var cancelBtn = document.getElementById("cancelar");
+
+
+		// Abrir diálogo
+		btn.onclick = function () {
+			dialog.showModal();
+		}
+
+		// Cerrar diálogo al hacer clic en "Cancelar"
+		cancelBtn.onclick = function () {
+			dialog.close();
+		}
+
+		// Validación de correo electrónico
+		var emailInput = document.getElementById("email");
+		var errorLabel = document.createElement("span");
+		errorLabel.className = "error";
+		errorLabel.innerHTML = "Introduzca un correo electrónico válido.";
+
+		emailInput.oninvalid = function () {
+			emailInput.parentNode.insertBefore(errorLabel, emailInput.nextSibling);
+		}
+
+		emailInput.oninput = function () {
+			errorLabel.remove();
+		}
+	</script>
+</body>
+
+</html>
